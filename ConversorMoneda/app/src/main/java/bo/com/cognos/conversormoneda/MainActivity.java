@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String TAG = MainActivity.class.getSimpleName();
+
     private EditText editTextMonto;
     private TextView textViewResultado;
     private Button buttonCalcular;
@@ -47,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
             editTextMonto.setHint("Monto en Euros");
         }
 
+        Log.d(TAG, "El tipo de moneda recibido es : " + moneda);
     }
 
 
-    public void convertirMoneda(View view) {
+    public void convertirMoneda(View view) throws Exception {
         // 1 leer el monto
         String monto = editTextMonto.getText().toString();
 
@@ -66,14 +69,16 @@ public class MainActivity extends AppCompatActivity {
 
         Double montoBolivianos = factorDeConversion * Double.valueOf(monto);
 
+        if (montoBolivianos == 0) {
+            Exception e = new Exception("ooops!!");
+            Log.e(TAG, "Ha ocurrido un error : " + e.getMessage());
+//            throw e;
+        }
+
         textViewResultado.setText("" + montoBolivianos + " BOB");
         textViewResultado.setTextColor(getResources().getColor(R.color.colorPrimary));
 
         buttonCalcular.setText("LISTO");
-//        buttonCalcular.setEnabled(false);
-
-        String cad = "El libro se llama \"Mil leguas...\" deJulio Verne";
-
     }
 
 
