@@ -6,41 +6,46 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
 
-public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.ViewHolder> {
+import bo.com.cognos.topmusic.domain.Cancion;
 
-    private String[] dataset;
 
-    public CancionAdapter(String[] dataset) {
+public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionViewHolder> {
+
+    private List<Cancion> dataset;
+
+    public CancionAdapter(List<Cancion> dataset) {
         this.dataset = dataset;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CancionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View nombreArtista = (View) LayoutInflater.from(parent.getContext())
+        View cancionView = (View) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.song_item, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(nombreArtista);
+        CancionViewHolder cancionViewHolder = new CancionViewHolder(cancionView);
 
-        return viewHolder;
+        return cancionViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textViewNombre.setText(dataset[position]);
+    public void onBindViewHolder(CancionViewHolder holder, int position) {
+        Cancion cancion = dataset.get(position);
+        holder.textViewNombre.setText(cancion.getNombreArtista());
     }
 
     @Override
     public int getItemCount() {
-        return dataset.length;
+        return dataset.size();
     }
 
     // Inner Class
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class CancionViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewNombre;
 
-        public ViewHolder(View view) {
+        public CancionViewHolder(View view) {
             super(view);
             textViewNombre = (TextView) view.findViewById(R.id.textViewNombre);
         }

@@ -8,6 +8,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import bo.com.cognos.topmusic.domain.Cancion;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -19,8 +24,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] canciones = {"let it be", "gang nan style", "los pollitos dice"};
+        // Lista de Canciones
+        List<Cancion> canciones = new ArrayList<>();
 
+        Cancion cancion1 = new Cancion();
+        cancion1.setNombreArtista("Shakira");
+        cancion1.setGenero("Latino");
+        cancion1.setNombreAlbum("En vivo 2016");
+
+        canciones.add(cancion1);
+
+        Cancion cancion2 = new Cancion();
+        cancion2.setNombreArtista("Pablo Milanes");
+        cancion2.setGenero("Latino");
+        cancion2.setNombreAlbum("Donde jugaran los comunistas");
+
+        canciones.add(cancion2);
+
+        Cancion cancion3 = new Cancion();
+        cancion3.setNombreArtista("Jhon Lennon");
+        cancion3.setGenero("Rock");
+        cancion3.setNombreAlbum("Image");
+
+        canciones.add(cancion3);
+
+
+        // Buscamos el Recycler View
         recyclerView = findViewById(R.id.recyclerViewCancion);
         recyclerView.setHasFixedSize(true);
 
