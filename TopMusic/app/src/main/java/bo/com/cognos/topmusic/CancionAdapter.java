@@ -1,5 +1,6 @@
 package bo.com.cognos.topmusic;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,9 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
     public void onBindViewHolder(CancionViewHolder holder, int position) {
         Cancion cancion = dataset.get(position);
         holder.textViewNombre.setText(cancion.getNombreArtista());
+
+        String albumGenero = cancion.getNombreAlbum() + " - " + cancion.getGenero();
+        holder.textViewAlbumGenero.setText(albumGenero);
     }
 
     @Override
@@ -44,10 +48,14 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
     // Inner Class
     public static class CancionViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewNombre;
+        public TextView textViewAlbumGenero;
 
         public CancionViewHolder(View view) {
             super(view);
-            textViewNombre = (TextView) view.findViewById(R.id.textViewNombre);
+            textViewNombre = view.findViewById(R.id.textViewNombre);
+            textViewAlbumGenero = view.findViewById(R.id.textViewAlbumGenero);
+
+            textViewAlbumGenero.setTextColor(Color.MAGENTA);
         }
     }
 

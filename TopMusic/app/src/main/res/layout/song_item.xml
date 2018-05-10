@@ -12,4 +12,11 @@
         android:text="TextView"
         android:textSize="24sp" />
 
+    <TextView
+        android:id="@+id/textViewAlbumGenero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@android:color/holo_green_dark" />
+
 </LinearLayout>
