@@ -2,6 +2,7 @@ package bo.com.cognos.topmusic;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import bo.com.cognos.topmusic.domain.Cancion;
 public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionViewHolder> {
 
     private List<Cancion> dataset;
+
+    private static final String TAG = CancionAdapter.class.getSimpleName();
 
     public CancionAdapter(List<Cancion> dataset) {
         this.dataset = dataset;
@@ -32,12 +35,20 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
     }
 
     @Override
-    public void onBindViewHolder(CancionViewHolder holder, int position) {
+    public void onBindViewHolder(CancionViewHolder holder, final int position) {
         Cancion cancion = dataset.get(position);
         holder.textViewNombre.setText(cancion.getNombreArtista());
 
         String albumGenero = cancion.getNombreAlbum() + " - " + cancion.getGenero();
         holder.textViewAlbumGenero.setText(albumGenero);
+
+        holder.textViewAlbumGenero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "elemento :: " + position);
+            }
+        });
+
     }
 
     @Override
@@ -46,7 +57,7 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
     }
 
     // Inner Class
-    public static class CancionViewHolder extends RecyclerView.ViewHolder {
+    public static class CancionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView textViewNombre;
         public TextView textViewAlbumGenero;
 
@@ -56,6 +67,13 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
             textViewAlbumGenero = view.findViewById(R.id.textViewAlbumGenero);
 
             textViewAlbumGenero.setTextColor(Color.MAGENTA);
+
+            textViewNombre.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Log.d(TAG, "Se hizo click en un cardview");
         }
     }
 
