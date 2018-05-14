@@ -37,7 +37,7 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
     @Override
     public void onBindViewHolder(CancionViewHolder holder, final int position) {
         Cancion cancion = dataset.get(position);
-        holder.textViewNombre.setText(cancion.getNombreArtista());
+        holder.textViewNombre.setText(cancion.getCollectionName());
 
         String albumGenero = cancion.getNombreAlbum() + " - " + cancion.getGenero();
         holder.textViewAlbumGenero.setText(albumGenero);

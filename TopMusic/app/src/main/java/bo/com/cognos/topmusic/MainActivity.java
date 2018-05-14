@@ -7,11 +7,17 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import bo.com.cognos.topmusic.domain.Cancion;
+import bo.com.cognos.topmusic.domain.Resultado;
+import bo.com.cognos.topmusic.service.ItunesAPI;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,35 +25,14 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private List<Cancion> canciones = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Lista de Canciones
-        List<Cancion> canciones = new ArrayList<>();
-
-        Cancion cancion1 = new Cancion();
-        cancion1.setNombreArtista("Shakira");
-        cancion1.setGenero("Latino");
-        cancion1.setNombreAlbum("En vivo 2016");
-
-        canciones.add(cancion1);
-
-        Cancion cancion2 = new Cancion();
-        cancion2.setNombreArtista("Pablo Milanes");
-        cancion2.setGenero("Latino");
-        cancion2.setNombreAlbum("Donde jugaran los comunistas");
-
-        canciones.add(cancion2);
-
-        Cancion cancion3 = new Cancion();
-        cancion3.setNombreArtista("Jhon Lennon");
-        cancion3.setGenero("Rock");
-        cancion3.setNombreAlbum("Image");
-
-        canciones.add(cancion3);
-
+        getCanciones();
 
         // Buscamos el Recycler View
         recyclerView = findViewById(R.id.recyclerViewCancion);
@@ -71,4 +56,26 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
+
+    public void getCanciones() {
+        Call<Resultado> resultadoCall = ItunesAPI.getClient().getCanciones("beatles");
+
+        resultadoCall.enqueue(new Callback<Resultado>() {
+            @Override
+            public void onResponse(Call<Resultado> call, Response<Resultado> response) {
+                Resultado resultado = response.body();
+                List<Cancion> songs = resultado.getResults();
+
+                canciones.addAll(songs);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<Resultado> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error al llamar canciones", Toast.LENGTH_LONG);
+            }
+        });
+
+    }
+
 }

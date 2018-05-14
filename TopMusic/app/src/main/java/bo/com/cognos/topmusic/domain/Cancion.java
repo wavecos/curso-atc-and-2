@@ -2,6 +2,7 @@ package bo.com.cognos.topmusic.domain;
 
 public class Cancion {
 
+    private String collectionName;
     private String nombreArtista;
     private String nombreAlbum;
     private String nombrteCancion;
@@ -10,6 +11,14 @@ public class Cancion {
     private String genero;
 
     public Cancion() {
+    }
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
     }
 
     public String getNombreArtista() {
