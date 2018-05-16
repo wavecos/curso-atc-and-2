@@ -39,7 +39,7 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
         Cancion cancion = dataset.get(position);
         holder.textViewNombre.setText(cancion.getTrackName());
 
-        String albumGenero = cancion.getCollectionName() + " - " + cancion.getTrackName();
+        String albumGenero = cancion.getCollectionName() + " - " + cancion.getPrimaryGenreName();
         holder.textViewAlbumGenero.setText(albumGenero);
 
         holder.textViewAlbumGenero.setOnClickListener(new View.OnClickListener() {

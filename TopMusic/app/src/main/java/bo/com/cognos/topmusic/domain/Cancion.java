@@ -4,6 +4,7 @@ public class Cancion {
 
     private String trackName;
     private String collectionName;
+    private String primaryGenreName;
     private String nombreArtista;
     private String nombreAlbum;
     private String nombrteCancion;
@@ -32,6 +33,10 @@ public class Cancion {
 
     public String getNombreAlbum() {
         return nombreAlbum;
+    }
+
+    public String getPrimaryGenreName() {
+        return primaryGenreName;
     }
 
     public void setNombreAlbum(String nombreAlbum) {
