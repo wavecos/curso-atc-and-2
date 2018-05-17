@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,9 +24,13 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    private EditText editTextArtista;
 
     List<Cancion> canciones = new ArrayList<>();
 
@@ -38,16 +44,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewCancion);
         recyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new CancionAdapter(canciones);
         recyclerView.setAdapter(adapter);
 
-        obtenerCanciones();
+        editTextArtista = findViewById(R.id.editTextArtista);
 
         Log.d("TEST", "despues de la llamada al servicio web");
-
     }
 
     public void verDetalle(View view) {
@@ -62,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void obtenerCanciones() {
-        Call<Resultado> resultadoCall = ItunesAPI.getItunesService().getCanciones("beatles", "song");
+    private void obtenerCanciones(String artista) {
+        Call<Resultado> resultadoCall = ItunesAPI.getItunesService().getCanciones(artista, "song");
 
         resultadoCall.enqueue(new Callback<Resultado>() {
             @Override
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 Resultado body = response.body();
                 List<Cancion> results = body.getResults();
 
+                canciones.clear();
                 canciones.addAll(results);
                 adapter.notifyDataSetChanged();
             }
@@ -83,5 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void buscarCanciones(View view) {
+        String criterio = editTextArtista.getText().toString();
 
+        Log.d(TAG, "el criterio de busqueda es : " + criterio);
+
+        obtenerCanciones(criterio);
+    }
 }

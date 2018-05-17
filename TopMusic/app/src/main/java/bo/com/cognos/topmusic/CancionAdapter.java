@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,10 +40,13 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
     @Override
     public void onBindViewHolder(CancionViewHolder holder, final int position) {
         Cancion cancion = dataset.get(position);
-        holder.textViewNombre.setText(cancion.getTrackName());
+        holder.textViewNombre.setText(cancion.getNombreCancion());
 
-        String albumGenero = cancion.getCollectionName() + " - " + cancion.getPrimaryGenreName();
+        String albumGenero = cancion.getNombreAlbum() + " - " + cancion.getGenero();
         holder.textViewAlbumGenero.setText(albumGenero);
+
+        // Aca cargamos la imagen
+        Picasso.get().load(cancion.getImagenUrl()).into(holder.imageViewAlbum);
 
         holder.textViewAlbumGenero.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +66,13 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
     public static class CancionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView textViewNombre;
         public TextView textViewAlbumGenero;
+        public ImageView imageViewAlbum;
 
         public CancionViewHolder(View view) {
             super(view);
             textViewNombre = view.findViewById(R.id.textViewNombre);
             textViewAlbumGenero = view.findViewById(R.id.textViewAlbumGenero);
+            imageViewAlbum = view.findViewById(R.id.imageViewAlbum);
 
             textViewAlbumGenero.setTextColor(Color.MAGENTA);
 

@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Resultado {
 
-    private String resultCount;
+    private Integer resultCount;
     private List<Cancion> results;
 
-    public String getResultCount() {
+    public Integer getResultCount() {
         return resultCount;
     }
 

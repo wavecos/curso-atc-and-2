@@ -1,26 +1,23 @@
 package bo.com.cognos.topmusic.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Cancion {
 
-    private String trackName;
-    private String collectionName;
-    private String primaryGenreName;
+    @SerializedName("artistName")
     private String nombreArtista;
+    @SerializedName("collectionName")
     private String nombreAlbum;
-    private String nombrteCancion;
+    @SerializedName("trackName")
+    private String nombreCancion;
+    @SerializedName("artworkUrl100")
     private String imagenUrl;
+    @SerializedName("country")
     private String pais;
+    @SerializedName("primaryGenreName")
     private String genero;
 
     public Cancion() {
-    }
-
-    public String getTrackName() {
-        return trackName;
-    }
-
-    public String getCollectionName() {
-        return collectionName;
     }
 
     public String getNombreArtista() {
@@ -35,20 +32,16 @@ public class Cancion {
         return nombreAlbum;
     }
 
-    public String getPrimaryGenreName() {
-        return primaryGenreName;
-    }
-
     public void setNombreAlbum(String nombreAlbum) {
         this.nombreAlbum = nombreAlbum;
     }
 
-    public String getNombrteCancion() {
-        return nombrteCancion;
+    public String getNombreCancion() {
+        return nombreCancion;
     }
 
-    public void setNombrteCancion(String nombrteCancion) {
-        this.nombrteCancion = nombrteCancion;
+    public void setNombreCancion(String nombreCancion) {
+        this.nombreCancion = nombreCancion;
     }
 
     public String getImagenUrl() {
