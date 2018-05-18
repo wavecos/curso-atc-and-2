@@ -1,5 +1,7 @@
 package bo.com.cognos.topmusic;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,12 +20,15 @@ import bo.com.cognos.topmusic.domain.Cancion;
 
 public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionViewHolder> {
 
+    private Context context;
+
     private List<Cancion> dataset;
 
     private static final String TAG = CancionAdapter.class.getSimpleName();
 
-    public CancionAdapter(List<Cancion> dataset) {
+    public CancionAdapter(List<Cancion> dataset, Context context) {
         this.dataset = dataset;
+        this.context = context;
     }
 
     @Override
@@ -39,7 +44,7 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
 
     @Override
     public void onBindViewHolder(CancionViewHolder holder, final int position) {
-        Cancion cancion = dataset.get(position);
+        final Cancion cancion = dataset.get(position);
         holder.textViewNombre.setText(cancion.getNombreCancion());
 
         String albumGenero = cancion.getNombreAlbum() + " - " + cancion.getGenero();
@@ -48,10 +53,13 @@ public class CancionAdapter extends RecyclerView.Adapter<CancionAdapter.CancionV
         // Aca cargamos la imagen
         Picasso.get().load(cancion.getImagenUrl()).into(holder.imageViewAlbum);
 
-        holder.textViewAlbumGenero.setOnClickListener(new View.OnClickListener() {
+        holder.imageViewAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "elemento :: " + position);
+                Intent intent = new Intent(context, InfoActivity.class);
+                intent.putExtra("cancion", cancion);
+                context.startActivity(intent);
             }
         });
 

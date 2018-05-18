@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new CancionAdapter(canciones);
+        adapter = new CancionAdapter(canciones, this);
         recyclerView.setAdapter(adapter);
 
         editTextArtista = findViewById(R.id.editTextArtista);

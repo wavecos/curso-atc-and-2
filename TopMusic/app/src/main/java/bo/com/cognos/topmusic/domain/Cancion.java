@@ -1,8 +1,11 @@
 package bo.com.cognos.topmusic.domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Cancion {
+public class Cancion implements Parcelable {
 
     @SerializedName("artistName")
     private String nombreArtista;
@@ -16,9 +19,33 @@ public class Cancion {
     private String pais;
     @SerializedName("primaryGenreName")
     private String genero;
+    @SerializedName("previewUrl")
+    private String cancionUrl;
 
     public Cancion() {
     }
+
+    protected Cancion(Parcel in) {
+        nombreArtista = in.readString();
+        nombreAlbum = in.readString();
+        nombreCancion = in.readString();
+        imagenUrl = in.readString();
+        pais = in.readString();
+        genero = in.readString();
+        cancionUrl = in.readString();
+    }
+
+    public static final Creator<Cancion> CREATOR = new Creator<Cancion>() {
+        @Override
+        public Cancion createFromParcel(Parcel in) {
+            return new Cancion(in);
+        }
+
+        @Override
+        public Cancion[] newArray(int size) {
+            return new Cancion[size];
+        }
+    };
 
     public String getNombreArtista() {
         return nombreArtista;
@@ -66,5 +93,25 @@ public class Cancion {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public String getCancionUrl() {
+        return cancionUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(this.nombreArtista);
+        parcel.writeString(this.nombreAlbum);
+        parcel.writeString(this.nombreCancion);
+        parcel.writeString(this.imagenUrl);
+        parcel.writeString(this.pais);
+        parcel.writeString(this.genero);
+        parcel.writeString(this.cancionUrl);
     }
 }
