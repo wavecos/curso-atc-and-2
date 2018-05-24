@@ -26,6 +26,8 @@ public class InfoActivity extends AppCompatActivity {
 
     private Cancion cancion;
 
+    private MediaPlayer player;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class InfoActivity extends AppCompatActivity {
 
     public void playCancion(View view) {
 
-        MediaPlayer player = new MediaPlayer();
+        player = new MediaPlayer();
         try {
             player.setDataSource(cancion.getCancionUrl());
             player.prepare();
@@ -60,4 +62,9 @@ public class InfoActivity extends AppCompatActivity {
         }
 
     }
+
+    public void stopCancion(View view) {
+        player.stop();
+    }
+
 }
