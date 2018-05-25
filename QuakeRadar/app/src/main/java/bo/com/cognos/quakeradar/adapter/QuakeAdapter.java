@@ -1,8 +1,10 @@
 package bo.com.cognos.quakeradar.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import bo.com.cognos.quakeradar.R;
+import bo.com.cognos.quakeradar.WebActivity;
 import bo.com.cognos.quakeradar.domain.Quake;
 
 public class QuakeAdapter extends RecyclerView.Adapter<QuakeAdapter.QuakeViewHolder> {
@@ -50,6 +53,18 @@ public class QuakeAdapter extends RecyclerView.Adapter<QuakeAdapter.QuakeViewHol
 
         holder.textViewPlace.setText(quake.getPlace());
         holder.textViewDate.setText(dateStr);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, WebActivity.class);
+                intent.putExtra("quakeUrl", quake.getUrl());
+
+                context.startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override

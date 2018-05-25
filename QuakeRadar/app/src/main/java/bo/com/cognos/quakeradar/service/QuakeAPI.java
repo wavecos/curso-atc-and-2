@@ -41,6 +41,12 @@ public class QuakeAPI {
         @GET("all_day.geojson")
         Call<Result> getAllQuakesLastDay();
 
+        @GET("all_week.geojson")
+        Call<Result> getAllQuakesLastWeek();
+
+        @GET("all_month.geojson")
+        Call<Result> getAllQuakesLastMonth();
+
     }
 
 }

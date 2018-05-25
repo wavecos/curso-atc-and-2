@@ -10,12 +10,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import bo.com.cognos.quakeradar.adapter.QuakeAdapter;
 import bo.com.cognos.quakeradar.domain.Quake;
+import bo.com.cognos.quakeradar.domain.QuakeTime;
 import bo.com.cognos.quakeradar.domain.Result;
 import bo.com.cognos.quakeradar.service.QuakeAPI;
 import retrofit2.Call;
@@ -27,8 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ProgressBar progressBar;
+    private TextView textViewTitle;
 
     private List<Quake> quakes = new ArrayList<>();
+    private QuakeTime timeSelected = QuakeTime.LAST_HOUR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +48,16 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                refreshQuakes(timeSelected);
+                Toast.makeText(MainActivity.this, "Datos actualizados", Toast.LENGTH_SHORT).show();
             }
         });
+
+        // Progress Bar
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setIndeterminate(true);
+
+        textViewTitle = findViewById(R.id.textViewTitle);
 
         // Para el RecyclerView
         recyclerView = findViewById(R.id.recyclerViewQuake);
@@ -55,23 +68,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new QuakeAdapter(this, quakes);
         recyclerView.setAdapter(adapter);
 
-        Call<Result> allQuakesLastHour = QuakeAPI.getQuakeService().getAllQuakesLastHour();
-        allQuakesLastHour.enqueue(new Callback<Result>() {
-            @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
-                Result result = response.body();
-                quakes.clear();
-                quakes.addAll(result.getQuakes());
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<Result> call, Throwable t) {
-
-            }
-        });
-
-
+        refreshQuakes(timeSelected);
     }
 
     @Override
@@ -89,10 +86,74 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_lastHour) {
+            refreshQuakes(QuakeTime.LAST_HOUR);
+            return true;
+        }
+
+        if (id == R.id.action_lastDay) {
+            refreshQuakes(QuakeTime.LAST_DAY);
+            return true;
+        }
+
+        if (id == R.id.action_lastWeek) {
+            refreshQuakes(QuakeTime.LAST_WEEK);
+            return true;
+        }
+
+        if (id == R.id.action_lastMonth) {
+            refreshQuakes(QuakeTime.LAST_MONTH);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    private void refreshQuakes(QuakeTime time) {
+        Call<Result> allQuakesByTime = null;
+
+        switch (time) {
+            case LAST_HOUR:
+                allQuakesByTime = QuakeAPI.getQuakeService().getAllQuakesLastHour();
+                textViewTitle.setText("Terremotos de la última hora");
+                break;
+            case LAST_DAY:
+                allQuakesByTime = QuakeAPI.getQuakeService().getAllQuakesLastDay();
+                textViewTitle.setText("Terremotos del último día");
+                break;
+            case LAST_WEEK:
+                allQuakesByTime = QuakeAPI.getQuakeService().getAllQuakesLastWeek();
+                textViewTitle.setText("Terremotos de la última semana");
+                break;
+            case LAST_MONTH:
+                allQuakesByTime = QuakeAPI.getQuakeService().getAllQuakesLastMonth();
+                textViewTitle.setText("Terremotos del último mes");
+                break;
+        }
+
+        timeSelected = time;
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        allQuakesByTime.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                Result result = response.body();
+                quakes.clear();
+                quakes.addAll(result.getQuakes());
+                adapter.notifyDataSetChanged();
+
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(MainActivity.this, "error : " + t.getMessage(), Toast.LENGTH_LONG).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
 }
