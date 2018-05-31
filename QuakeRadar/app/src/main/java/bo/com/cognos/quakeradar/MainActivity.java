@@ -31,13 +31,9 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private ProgressBar progressBar;
-    private TextView textViewTitle;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private PageAdapter pageAdapter;
 
     private List<Quake> quakes = new ArrayList<>();
     private QuakeTime timeSelected = QuakeTime.LAST_HOUR;
@@ -62,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
 
         viewPager = findViewById(R.id.viewPager);
-        PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager());
+        pageAdapter = new PageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pageAdapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -84,22 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Progress Bar
-//        progressBar = findViewById(R.id.progressBar);
-//        progressBar.setIndeterminate(true);
-
-//        textViewTitle = findViewById(R.id.textViewTitle);
-
-        // Para el RecyclerView
-//        recyclerView = findViewById(R.id.recyclerViewQuake);
-//
-//        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        adapter = new QuakeAdapter(this, quakes);
-//        recyclerView.setAdapter(adapter);
-//
-//        refreshQuakes(timeSelected);
+        refreshQuakes(timeSelected);
     }
 
     @Override
@@ -147,25 +128,25 @@ public class MainActivity extends AppCompatActivity {
         switch (time) {
             case LAST_HOUR:
                 allQuakesByTime = QuakeAPI.getQuakeService().getAllQuakesLastHour();
-                textViewTitle.setText("Terremotos de la última hora");
+//                textViewTitle.setText("Terremotos de la última hora");
                 break;
             case LAST_DAY:
                 allQuakesByTime = QuakeAPI.getQuakeService().getAllQuakesLastDay();
-                textViewTitle.setText("Terremotos del último día");
+//                textViewTitle.setText("Terremotos del último día");
                 break;
             case LAST_WEEK:
                 allQuakesByTime = QuakeAPI.getQuakeService().getAllQuakesLastWeek();
-                textViewTitle.setText("Terremotos de la última semana");
+//                textViewTitle.setText("Terremotos de la última semana");
                 break;
             case LAST_MONTH:
                 allQuakesByTime = QuakeAPI.getQuakeService().getAllQuakesLastMonth();
-                textViewTitle.setText("Terremotos del último mes");
+//                textViewTitle.setText("Terremotos del último mes");
                 break;
         }
 
         timeSelected = time;
 
-        progressBar.setVisibility(View.VISIBLE);
+//        progressBar.setVisibility(View.VISIBLE);
 
         allQuakesByTime.enqueue(new Callback<Result>() {
             @Override
@@ -173,14 +154,32 @@ public class MainActivity extends AppCompatActivity {
                 Result result = response.body();
                 quakes.clear();
                 quakes.addAll(result.getQuakes());
-                adapter.notifyDataSetChanged();
 
-                progressBar.setVisibility(View.GONE);
+                int currentItem = viewPager.getCurrentItem();
+
+                Object objectFragment = pageAdapter.instantiateItem(viewPager, viewPager.getCurrentItem());
+
+                switch (currentItem) {
+                    case 0:
+                        ListFragment listFragment = (ListFragment) objectFragment;
+                        listFragment.updateList(quakes);
+                        break;
+                    case 1:
+                        MapFragment mapFragment = (MapFragment) objectFragment;
+//                        mapFragment.updateList(quakes);
+                        break;
+                    default:
+                        break;
+                }
+
+//                adapter.notifyDataSetChanged();
+
+//                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
-                progressBar.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.GONE);
                 Toast.makeText(MainActivity.this, "error : " + t.getMessage(), Toast.LENGTH_LONG).show();
                 t.printStackTrace();
             }
