@@ -54,8 +54,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         map = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        LatLng sydney = new LatLng(-34, 151);
+//        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 
         LatLng cochabamba = new LatLng(-17.387684, -66.161789);
         map.addMarker(new MarkerOptions().position(cochabamba).title("COGNOS Cochabamba"));
@@ -98,5 +98,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
+    }
+
+    public void updateMap(List<Quake> quakes) {
+        for (Quake q : quakes) {
+            Double latitude = q.getLatitude();
+            Double longitude = q.getLongitude();
+            String title = q.getMagnitude() + " - " + q.getPlace();
+
+            LatLng quakeCoords = new LatLng(latitude, longitude);
+            MarkerOptions quakeMarker = new MarkerOptions().position(quakeCoords).title(title);
+
+            map.addMarker(quakeMarker);
+        }
+        mapView.invalidate();
     }
 }

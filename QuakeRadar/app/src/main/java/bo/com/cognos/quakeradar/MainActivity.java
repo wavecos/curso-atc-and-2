@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
                 int currentItem = viewPager.getCurrentItem();
 
-                Object objectFragment = pageAdapter.instantiateItem(viewPager, viewPager.getCurrentItem());
+                Object objectFragment = pageAdapter.instantiateItem(viewPager, currentItem);
 
                 switch (currentItem) {
                     case 0:
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         MapFragment mapFragment = (MapFragment) objectFragment;
-//                        mapFragment.updateList(quakes);
+                        mapFragment.updateMap(quakes);
                         break;
                     default:
                         break;
