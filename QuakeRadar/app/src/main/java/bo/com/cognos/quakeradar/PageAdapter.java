@@ -18,6 +18,8 @@ public class PageAdapter extends FragmentStatePagerAdapter {
                 return new ListFragment();
             case 1:
                 return new MapFragment();
+            case 2:
+                return new FavoritesFragment();
             default:
                 return null;
         }
@@ -25,6 +27,6 @@ public class PageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }

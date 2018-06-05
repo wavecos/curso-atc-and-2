@@ -1,17 +1,36 @@
 package bo.com.cognos.quakeradar.domain;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Quake {
-
+@Entity(tableName = "favorites")
+public class Quake implements Serializable {
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    private Long id;
     private Float magnitude;
     private String place;
+    @Ignore
     private Date date;
     private String url;
     private Boolean isTsunami;
     private String type;
     private Double latitude;
     private Double longitude;
+
+    @NonNull
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(@NonNull Long id) {
+        this.id = id;
+    }
 
     public Float getMagnitude() {
         return magnitude;

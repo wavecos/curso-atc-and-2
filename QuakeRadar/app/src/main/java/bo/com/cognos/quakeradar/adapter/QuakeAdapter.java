@@ -2,6 +2,7 @@ package bo.com.cognos.quakeradar.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -47,7 +48,11 @@ public class QuakeAdapter extends RecyclerView.Adapter<QuakeAdapter.QuakeViewHol
 
         String magnitudeStr = String.valueOf(quake.getMagnitude());
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String dateStr = dateFormat.format(quake.getDate());
+
+        String dateStr = "no hay fecha";
+        if (quake.getDate() != null) {
+            dateStr = dateFormat.format(quake.getDate());
+        }
 
         holder.textViewMagnitude.setText(magnitudeStr);
 
@@ -62,7 +67,12 @@ public class QuakeAdapter extends RecyclerView.Adapter<QuakeAdapter.QuakeViewHol
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, WebActivity.class);
-                intent.putExtra("quakeUrl", quake.getUrl());
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("quake", quake);
+                intent.putExtras(bundle);
+
+//                intent.putExtra("quakeUrl", quake.getUrl());
 
                 context.startActivity(intent);
             }
