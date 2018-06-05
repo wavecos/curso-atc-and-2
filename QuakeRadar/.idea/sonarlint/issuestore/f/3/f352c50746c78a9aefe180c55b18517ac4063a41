@@ -1,17 +1,22 @@
 
-ksquid:UselessImportCheck"CRemove this unused import 'android.support.design.widget.Snackbar'.( À®p8³‘ÓËº,
-Qsquid:S1068"0Remove this unused "recyclerView" private field.(¿á© ýÿÿÿÿ8³‘ÓËº,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ä×ª¾8³‘ÓËº,
-tsquid:S1450"XRemove the "tabLayout" field and declare it as a local variable in the relevant methods.(¤×ä8³‘ÓËº,
-Dsquid:S1148"#Use a logger to log this exception.(¯Óí‘úÿÿÿÿ8³‘ÓËº,
-isquid:S2259"MA "NullPointerException" could be thrown; "allQuakesByTime" is nullable here.(æºË…8³‘ÓËº,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÿ¡»Œ8³‘ÓËº,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¦Žë½ýÿÿÿÿ8³‘ÓËº,
-jsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(²Ú±Ž8³‘ÓËº,
-qsquid:CallToDeprecatedMethod"?Remove this use of "setOnPageChangeListener"; it is deprecated.(–ÃýÎûÿÿÿÿ8î˜òËº,
-Msquid:S1068"1Remove this unused "layoutManager" private field.(üÉÙ¼8³‘ÓËº,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(äÙöË8³‘ÓËº,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¤•Ú€8³‘ÓËº,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ýÃ‚»ýÿÿÿÿ8³‘ÓËº,
-Ksquid:S1905"*Remove this unnecessary cast to "Toolbar".(ªü–ýÿÿÿÿ8³‘ÓËº,
-Rsquid:S1905"7Remove this unnecessary cast to "FloatingActionButton".(–“€G8³‘ÓËº,
+tsquid:S1450"XRemove the "tabLayout" field and declare it as a local variable in the relevant methods.(¤×ä8ÏÚí¼,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(«é‚Õúÿÿÿÿ8ÏÚí¼,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(É¤šÀ8ÏÚí¼,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(õ×€Ô8ÏÚí¼,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¯´Â›ÿÿÿÿÿ8ÏÚí¼,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(òî•íüÿÿÿÿ8ÏÚí¼,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¼†ûÿÿÿÿÿ8ÏÚí¼,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ð£Ç»8ÏÚí¼,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ð£Ç»8ÏÚí¼,
+Ksquid:S1905"*Remove this unnecessary cast to "Toolbar".(ªü–ýÿÿÿÿ8ÏÚí¼,
+Rsquid:S1905"7Remove this unnecessary cast to "FloatingActionButton".(–“€G8ÏÚí¼,
+qsquid:CallToDeprecatedMethod"?Remove this use of "setOnPageChangeListener"; it is deprecated.(–ÃýÎûÿÿÿÿ8ÏÚí¼,
+isquid:S2259"MA "NullPointerException" could be thrown; "allQuakesByTime" is nullable here.(æºË…8ÏÚí¼,
+esquid:UselessImportCheck"7Remove this unused import 'android.widget.ProgressBar'.(³ñÿŸùÿÿÿÿ8ÏÚí¼,
+xsquid:UselessImportCheck"JRemove this unused import 'android.support.v7.widget.LinearLayoutManager'.(í™½Úúÿÿÿÿ8ÏÚí¼,
+lsquid:UselessImportCheck"CRemove this unused import 'android.support.v7.widget.RecyclerView'.(ÊŠáó8ÏÚí¼,
+bsquid:UselessImportCheck"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ8ÏÚí¼,
+ssquid:UselessImportCheck"JRemove this unused import 'bo.com.cognos.quakeradar.adapter.QuakeAdapter'.(‘¨Ôü8ÏÚí¼,
+ksquid:UselessImportCheck"CRemove this unused import 'android.support.design.widget.Snackbar'.( À®p8ÏÚí¼,
+Dsquid:S1148"#Use a logger to log this exception.(¯Óí‘úÿÿÿÿ8ÏÚí¼,
+jsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(²Ú±Ž8ÏÚí¼,

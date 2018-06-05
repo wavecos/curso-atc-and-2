@@ -1,3 +1,5 @@
 
-psquid:S1450"VRemove the "webView" field and declare it as a local variable in the relevant methods.(„Â ¿þÿÿÿÿ
-csquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(’Ÿá
+wsquid:S1450"VRemove the "webView" field and declare it as a local variable in the relevant methods.(„Â ¿þÿÿÿÿ8Ð²Õì¼,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ö¨ò™øÿÿÿÿ8Ð²Õì¼,
+[squid:UselessImportCheck"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ8Ð²Õì¼,
+jsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(’Ÿá8Ð²Õì¼,

@@ -1,0 +1,7 @@
+
+Ésquid:S1488"gImmediately return this expression instead of assigning it to the temporary variable "quakeViewHolder".(†Õ≠Ï8œç¢Ìº,
+ã"squid:ClassVariableVisibilityCheck"YMake textViewPlace a static final constant or non-public and provide accessors if needed.(Ê£∏N8ÄÖßÌº,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ìÉµå8ÄÖßÌº,
+è"squid:ClassVariableVisibilityCheck"]Make textViewMagnitude a static final constant or non-public and provide accessors if needed.(ÀÓ⁄S8ÄÖßÌº,
+ã"squid:ClassVariableVisibilityCheck"XMake textViewDate a static final constant or non-public and provide accessors if needed.(≠œ∏€8ÄÖßÌº,
+[squid:UselessImportCheck"-Remove this unused import 'android.util.Log'.(‘¶ÿ≤¯ˇˇˇˇ8œç¢Ìº,
